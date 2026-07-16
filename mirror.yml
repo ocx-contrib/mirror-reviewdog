@@ -1,0 +1,76 @@
+name: reviewdog
+target:
+  registry: ocx.sh
+  repository: reviewdog
+
+source:
+  type: github_release
+  owner: reviewdog
+  repo: reviewdog
+  tag_pattern: "^v(?P<version>\\d+\\.\\d+\\.\\d+)$"
+
+assets:
+  linux/amd64:
+    - "^reviewdog_.*_Linux_x86_64\\.tar\\.gz$"
+  linux/arm64:
+    - "^reviewdog_.*_Linux_arm64\\.tar\\.gz$"
+  darwin/amd64:
+    - "^reviewdog_.*_Darwin_x86_64\\.tar\\.gz$"
+  darwin/arm64:
+    - "^reviewdog_.*_Darwin_arm64\\.tar\\.gz$"
+  windows/amd64:
+    - "^reviewdog_.*_Windows_x86_64\\.tar\\.gz$"
+  windows/arm64:
+    - "^reviewdog_.*_Windows_arm64\\.tar\\.gz$"
+
+asset_type:
+  type: archive
+  strip_components: 0
+
+metadata:
+  default: metadata.json
+
+skip_prereleases: true
+cascade: true
+build_timestamp: date
+
+versions:
+  min: "0.20.0"
+  new_per_run: 10
+  poll_interval: "0 */6 * * *"
+
+verify:
+  github_asset_digest: true
+
+concurrency:
+  max_downloads: 8
+  max_bundles: 4
+  max_pushes: 2
+  rate_limit_ms: 100
+  max_retries: 3
+  compression_threads: 0
+
+tests:
+  - name: smoke
+    script: tests/smoke.star
+
+platforms:
+  linux/amd64:
+    runner: ubuntu-latest
+  linux/arm64:
+    runner: ubuntu-24.04-arm
+  darwin/amd64:
+    runner: macos-14
+  darwin/arm64:
+    runner: macos-14
+  windows/amd64:
+    runner: windows-latest
+    shell: pwsh
+  windows/arm64:
+    runner: windows-11-arm
+    shell: pwsh
+
+notify:
+  discord:
+    webhook_secret: OCX_MIRROR_DISCORD_HOOK
+    user_id: "227748867204972545"

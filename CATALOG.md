@@ -1,0 +1,23 @@
+---
+title: reviewdog
+description: Automated code review tool that posts any linter's findings as review comments
+keywords: reviewdog,code-review,linter,ci,errorformat,diff,rdjson
+---
+
+# reviewdog
+
+reviewdog is an automated code review tool that integrates with any code
+analysis tool regardless of programming language. It parses linter output
+(via errorformat, checkstyle, SARIF, rdjson, and many built-in formats),
+filters findings by the diff under review, and posts them as review comments
+on GitHub, GitLab, Bitbucket, or Gerrit — or reports them locally. A single
+self-contained binary, no runtime dependencies.
+
+## What's included
+
+- **reviewdog** — the code review CLI
+
+## Links
+
+- [reviewdog Documentation](https://github.com/reviewdog/reviewdog#readme)
+- [reviewdog on GitHub](https://github.com/reviewdog/reviewdog)
