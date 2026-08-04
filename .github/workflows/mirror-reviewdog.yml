@@ -6,7 +6,7 @@ name: reviewdog
 
 on:
   schedule:
-    - cron: '0 */6 * * *'
+    - cron: '14 3-23/6 * * *'
   workflow_dispatch:
   push:
     branches: [main]
